@@ -71,19 +71,17 @@ describe('myReduce', function() {
     });
   });
 
+describe("when NO initialValue is provided", function() {
 
-  describe("when NO initialValue is provided", function() {
-
-    it("it uses element 0 as the starting point (1st arg)", function() {
-      var stachedValues = [];
-      myReduce(['a', 0, 0, 0], function(prev, _curr) {
-        stachedValues.push(prev);
-        return 'x';
-      });
-      console.log('      results: ', stachedValues);
-      expect(stachedValues[0]).to.equal('a');
-    });
-
+   it("it uses element 0 as the starting point (1st arg)", function() {
+     var stachedValues = [];
+     myReduce(['a', 0, 0, 0], function(prev, _curr) {
+       stachedValues.push(prev);
+       return 'x';
+     });
+     console.log('      results: ', stachedValues);
+     expect(stachedValues[0]).to.equal('a');
+   });
     it("it uses element 1 as the first currentValue (2nd argument)", function() {
       var stachedValues = [];
       myReduce([0, 'b', 0], function(_prev, curr) {
@@ -116,51 +114,51 @@ describe('myReduce', function() {
       expect(resultingArray).to.have.members([1, 2, 3]);
     });
 
-    it("the first index is 1", function() {
-      var results = [];
-      myReduce(testArr, function(_prev, _next, index) {
-        results.push(index);
-      });
-      expect(results[0]).to.equal(1);
-    });
+  //   it("the first index is 1", function() {
+  //     var results = [];
+  //     myReduce(testArr, function(_prev, _next, index) {
+  //       results.push(index);
+  //     });
+  //     expect(results[0]).to.equal(1);
+  //   });
 
-  });
+  // });
 
-  describe("when an initialValue IS provided", function() {
-      it("passes the initialValue in as the first argument to the callback on the first pass", function() {
-        var result = [];
+  // describe("when an initialValue IS provided", function() {
+  //     it("passes the initialValue in as the first argument to the callback on the first pass", function() {
+  //       var result = [];
 
-        myReduce(testArr, function(previousValue) {
-          result.push(previousValue);
-        }, 192);
-        expect(result[0]).to.equal(192);
-      });
+  //       myReduce(testArr, function(previousValue) {
+  //         result.push(previousValue);
+  //       }, 192);
+  //       expect(result[0]).to.equal(192);
+  //     });
 
-      it("the first index is 0", function() {
-        var results = [];
-        myReduce(testArr, function(_prev, _next, index) {
-          results.push(index);
-        }, 'asdf');
-        expect(results[0]).to.equal(0);
-      });
+  //     it("the first index is 0", function() {
+  //       var results = [];
+  //       myReduce(testArr, function(_prev, _next, index) {
+  //         results.push(index);
+  //       }, 'asdf');
+  //       expect(results[0]).to.equal(0);
+  //     });
 
-      it("works with arrays of length 0", function testArrayL0() {
-        var resultingArray = [];
-        var result = myReduce([], function(item) {
-          return '44';
-        }, 99);
-        // compare elements in the result to expected array
-        console.log('       result: ', result);
-        expect(result).to.equal(99);
-      });
+  //     it("works with arrays of length 0", function testArrayL0() {
+  //       var resultingArray = [];
+  //       var result = myReduce([], function(item) {
+  //         return '44';
+  //       }, 99);
+  //       // compare elements in the result to expected array
+  //       console.log('       result: ', result);
+  //       expect(result).to.equal(99);
+  //     });
 
-      it("never calls the callback if the array is length 0", function() {
-        function spyOnMe() {}
-        var spy = chai.spy(spyOnMe);
+  //     it("never calls the callback if the array is length 0", function() {
+  //       function spyOnMe() {}
+  //       var spy = chai.spy(spyOnMe);
 
-        myReduce([], spy, 11);
-        expect(spy).to.not.have.been.called();
-      });
+  //       myReduce([], spy, 11);
+  //       expect(spy).to.not.have.been.called();
+  //     });
 
   });
 
